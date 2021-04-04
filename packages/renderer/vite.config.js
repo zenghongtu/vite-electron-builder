@@ -2,7 +2,7 @@ import {chrome} from '../../electron-vendors.config.json'
 import {join} from 'path'
 import externalPackages from '../../external-packages.config.js'
 import {defineConfig} from 'vite'
-import vue from '@vitejs/plugin-vue'
+import reactRefresh from '@vitejs/plugin-react-refresh'
 import {loadAndSetEnv} from '../../scripts/loadAndSetEnv.mjs'
 
 
@@ -25,7 +25,12 @@ export default defineConfig({
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
     },
   },
-  plugins: [vue()],
+  plugins: [reactRefresh({
+    parserPlugins: [
+      'classProperties',
+      'classPrivateProperties',
+    ],
+  })],
   base: '',
   build: {
     sourcemap: true,
